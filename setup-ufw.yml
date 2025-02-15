@@ -1,0 +1,27 @@
+- name: setup ufw
+  hosts: servers
+  become: true
+
+  tasks:
+      - name: install ufw
+        apt:
+            name: ufw
+            state: present
+            update_cache: yes
+
+      - name: allow http
+        ufw:
+            rule: allow
+            port: "80"
+            proto: tcp
+
+      - name: allow hono
+        ufw:
+            rule: allow
+            port: "3000"
+            proto: tcp
+
+      - name: enable ufw
+        ufw:
+            state: enabled
+            policy: deny
