@@ -1,0 +1,30 @@
+- name: setup docker
+  hosts: servers
+  become: true
+
+  tasks:
+      - name: install docker
+        apt:
+            name: docker.io
+            state: present
+            update_cache: yes
+
+      - name: check docker status
+        service:
+            name: docker
+            state: started
+            enabled: yes
+
+      - name: create docker group
+        group:
+            name: docker
+            state: present
+
+      - name: add user to docker group
+        user:
+            name: ubuntu
+            groups: docker
+            append: yes
+
+      - name: apply group changes
+        meta: reset_connection
