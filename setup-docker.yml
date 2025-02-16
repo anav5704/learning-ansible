@@ -24,6 +24,11 @@
       - name: check docker compose status
         command: docker-compose --version
 
+      - name: configure nginx
+        copy:
+            src: config/docker-compose.yaml
+            dest: /home/ubuntu
+
       - name: create docker group
         group:
             name: docker
