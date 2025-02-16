@@ -15,6 +15,15 @@
             state: started
             enabled: yes
 
+      - name: install docker compose
+        snap:
+            name: docker
+            channel: stable
+            state: present
+
+      - name: check docker compose status
+        command: docker-compose --version
+
       - name: create docker group
         group:
             name: docker
