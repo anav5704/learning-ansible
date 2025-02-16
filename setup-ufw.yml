@@ -9,10 +9,17 @@
             state: present
             update_cache: yes
 
+      - name: allow http
+        ufw:
+            rule: allow
+            port: "80"
+            proto: tcp
+
       - name: allow nginx
         ufw:
             rule: allow
-            name: Nginx HTTP
+            port: "8080"
+            proto: tcp
 
       - name: enable ufw
         ufw:
