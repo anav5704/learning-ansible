@@ -9,17 +9,10 @@
             state: present
             update_cache: yes
 
-      - name: allow http
+      - name: allow nginx
         ufw:
             rule: allow
-            port: "80"
-            proto: tcp
-
-      - name: allow hono
-        ufw:
-            rule: allow
-            port: "3000"
-            proto: tcp
+            name: Nginx HTTP
 
       - name: enable ufw
         ufw:
