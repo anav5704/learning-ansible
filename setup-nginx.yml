@@ -1,0 +1,26 @@
+- name: setup nginx
+  hosts: servers
+  become: true
+
+  tasks:
+      - name: install nginx
+        apt:
+            name: nginx
+            state: present
+            update_cache: yes
+
+      - name: check nginx status
+        service:
+            name: nginx
+            state: started
+            enabled: yes
+
+      - name: configure nginx
+        template:
+            src: nginx.conf
+            dest: /etc/nginx/nginx.conf
+
+      - name: restart nginx
+        service:
+            name: nginx
+            state: restarted
